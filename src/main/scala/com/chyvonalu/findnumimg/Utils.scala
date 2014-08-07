@@ -45,15 +45,15 @@ object Utils {
 
   val lettersFor = Map(
     0 -> List("н"),
-    1 -> List("л", "ё"),
-    2 -> List("б"),
-    3 -> List("тр", "т"),
-    4 -> List("ч"),
+    1 -> List("р"),
+    2 -> List("б", "м"),
+    3 -> List("т"),
+    4 -> List("ч", "к"),
     5 -> List("п"),
-    6 -> List("ш"),
-    7 -> List("с", "з"),
+    6 -> List("ш", "л"),
+    7 -> List("с"),
     8 -> List("в", "ф"),
-    9 -> List("д")
+    9 -> List("д", "з")
   )
 
   def find(num: Int, words: Traversable[String]): List[String] = {
@@ -61,7 +61,7 @@ object Utils {
 //    val digits = pad(toDigits(num), 3)
     val result = ListBuffer[String]()
     val letters = product(digits.map(lettersFor))
-    val regexs = letters.map(letters => new Regex("^" + letters.mkString(".*")))
+    val regexs = letters.map(letters => new Regex("^[аоуэыийяёюеь]*" + letters.mkString("[аоуэыийяёюеь]*")))
     words foreach { word =>
       for((regex, letters) <- (regexs zip letters)) {
         if (regex.findFirstIn(word).isDefined) {
