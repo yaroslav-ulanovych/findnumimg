@@ -43,23 +43,10 @@ object Utils {
     Source.fromURL(url).getLines().toVector.map(_.toLowerCase)
   }
 
-  val lettersFor = Map(
-    0 -> List("н", "3"),
-    1 -> List("м"),
-    2 -> List("б", "ц"),
-    3 -> List("т"),
-    4 -> List("ч", "к"),
-    5 -> List("п"),
-    6 -> List("ш", "г", "х"),
-    7 -> List("с"),
-    8 -> List("в", "ф"),
-    9 -> List("д")
-  )
-
-  def find(num: Int, words: Traversable[String]): List[String] = {
+  def find(num: Int, words: Traversable[String], cipher: Cipher): List[String] = {
     val digits = pad(toDigits(num), 2)
     val result = ListBuffer[String]()
-    val letters = product(digits.map(lettersFor))
+    val letters = product(digits.map(cipher.get))
     val regexs = letters.map(letters => new Regex("^[аоуэыийяёюеь]*" + letters.mkString("[аоуэыийяёюеь]*")))
     words foreach { word =>
       for((regex, letters) <- (regexs zip letters)) {
