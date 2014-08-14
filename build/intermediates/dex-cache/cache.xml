@@ -2,28 +2,34 @@
 <pre-dex-items>
 
     <item
-        dex="/home/mahpella/work/findnumimg/app/build/intermediates/pre-dexed/debug/support-v13-19.1.0-d8844e21f41ca155a5c1f772b688abf13a0e2319.jar"
-        jar="/home/mahpella/bin/android-studio/sdk/extras/android/m2repository/com/android/support/support-v13/19.1.0/support-v13-19.1.0.jar"
+        dex="D:\work\findnumimg\app\build\intermediates\pre-dexed\release\classes-7739da07f6ee198a941a0b40248bfad032230f71.jar"
+        jar="D:\work\findnumimg\app\build\intermediates\exploded-aar\com.android.support\support-v4\20.0.0\classes.jar"
         jumboMode="false"
         revision="20.0.0"
-        sha1="6b852a232f642c75a7fdfc7212b841b8c8f8959c"/>
+        sha1="8694693636ab36910c8100ce527c258ff3ebece0"/>
     <item
-        dex="/home/mahpella/work/findnumimg/app/build/intermediates/pre-dexed/debug/scala-library-2.11.1-5ef51f77a0e02a80bc5ef026f9df5087081797c2.jar"
-        jar="/home/mahpella/.gradle/caches/modules-2/files-2.1/org.scala-lang/scala-library/2.11.1/e11da23da3eabab9f4777b9220e60d44c1aab6a/scala-library-2.11.1.jar"
+        dex="D:\work\findnumimg\app\build\intermediates\pre-dexed\release\core-7cc6da3db543820e9622157afd3d82ef44b550ed.jar"
+        jar="D:\work\findnumimg\core\build\libs\core.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="2f6c22568bb06d31efb1b76a1ef5e429356060f5"/>
+    <item
+        dex="D:\work\findnumimg\app\build\intermediates\pre-dexed\release\scala-library-2.11.1-84092f2bcf6c5acf8fe5d2773c5985f1be103e5b.jar"
+        jar="C:\Users\Yaroslav_Ulanovych@epam.com\.gradle\caches\modules-2\files-2.1\org.scala-lang\scala-library\2.11.1\e11da23da3eabab9f4777b9220e60d44c1aab6a\scala-library-2.11.1.jar"
         jumboMode="false"
         revision="20.0.0"
         sha1="0e11da23da3eabab9f4777b9220e60d44c1aab6a"/>
     <item
-        dex="/home/mahpella/work/findnumimg/app/build/intermediates/pre-dexed/debug/core-08aa6a4dbab178121a8d18da9b3ddf77345ee652.jar"
-        jar="/home/mahpella/work/findnumimg/core/build/libs/core.jar"
+        dex="D:\work\findnumimg\app\build\intermediates\pre-dexed\release\support-annotations-20.0.0-8155302094fe8fcf12df73a9356b6cd3561c9d32.jar"
+        jar="D:\bin\android\android-sdk_r23.0.2-windows\extras\android\m2repository\com\android\support\support-annotations\20.0.0\support-annotations-20.0.0.jar"
         jumboMode="false"
         revision="20.0.0"
-        sha1="e6d87777fdc86c1de510897e39de32aa95dfe6d2"/>
+        sha1="9d9013e9ff35fc3756411e62873c363c70c638fa"/>
     <item
-        dex="/home/mahpella/work/findnumimg/app/build/intermediates/pre-dexed/debug/support-v4-19.1.0-2b78c8f29f54286a747db5ceeecc6229f6929bfe.jar"
-        jar="/home/mahpella/bin/android-studio/sdk/extras/android/m2repository/com/android/support/support-v4/19.1.0/support-v4-19.1.0.jar"
+        dex="D:\work\findnumimg\app\build\intermediates\pre-dexed\release\internal_impl-20.0.0-95c8055e42571f6822efc2111fb4f454b2db5ad7.jar"
+        jar="D:\work\findnumimg\app\build\intermediates\exploded-aar\com.android.support\support-v4\20.0.0\libs\internal_impl-20.0.0.jar"
         jumboMode="false"
         revision="20.0.0"
-        sha1="85f201b380937e61a9dce6ca90ccf6872abbfb67"/>
+        sha1="e40b3078e3fbd353c9f44da8df25a8fc0078209d"/>
 
 </pre-dex-items>

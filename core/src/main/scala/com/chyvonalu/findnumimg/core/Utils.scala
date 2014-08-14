@@ -43,18 +43,18 @@ object Utils {
     Source.fromURL(url).getLines().toVector.map(_.toLowerCase)
   }
 
-  def find(num: Int, words: Traversable[String], cipher: Cipher): List[String] = {
-    val digits = pad(toDigits(num), 2)
-    val result = ListBuffer[String]()
-    val letters = product(digits.map(cipher.get))
-    val regexs = letters.map(letters => new Regex("^[аоуэыийяёюеь]*" + letters.mkString("[аоуэыийяёюеь]*")))
-    words foreach { word =>
-      for((regex, letters) <- (regexs zip letters)) {
-        if (regex.findFirstIn(word).isDefined) {
-          result += highlight(word, letters)
-        }
-      }
-    }
-    result.sortBy(_.length).toList
-  }
+  // def find(num: Int, words: Traversable[String], cipher: Cipher): List[String] = {
+  //   val digits = pad(toDigits(num), 2)
+  //   val result = ListBuffer[String]()
+  //   val letters = product(digits.map(cipher.get))
+  //   val regexs = letters.map(letters => new Regex("^[аоуэыийяёюеь]*" + letters.mkString("[аоуэыийяёюеь]*")))
+  //   words foreach { word =>
+  //     for((regex, letters) <- (regexs zip letters)) {
+  //       if (regex.findFirstIn(word).isDefined) {
+  //         result += highlight(word, letters)
+  //       }
+  //     }
+  //   }
+  //   result.sortBy(_.length).toList
+  // }
 }
