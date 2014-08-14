@@ -1,6 +1,9 @@
 package com.chyvonalu.findnumimg.androidapp;
 
 import android.app.ActionBar;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -8,12 +11,22 @@ import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.Fragment;
+import android.util.AttributeSet;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import android.view.View;
+import com.chyvonalu.findnumimg.core.Cypher;
+import com.chyvonalu.findnumimg.core.Cypher$;
 import com.chyvonalu.findnumimg.core.Utils;
+import scala.Tuple10;
 
 public class MainActivity extends FragmentActivity implements ActionBar.TabListener {
+
+	public CypherView cypherView;
+	public SearchView searchView;
+
+	private Cypher cypher;
 
     /**
       * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -30,11 +43,39 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
       */
     ViewPager mViewPager;
 
-    @Override
+	public void loadSettings() {
+		SharedPreferences settings = getSharedPreferences("settings", MODE_PRIVATE);
+		cypher = Cypher$.MODULE$.buildFromStrings(Tuple10.apply(
+			settings.getString("cypher0", "н"),
+			settings.getString("cypher1", "м"),
+			settings.getString("cypher2", "б"),
+			settings.getString("cypher3", "т"),
+			settings.getString("cypher4", "ч к"),
+			settings.getString("cypher5", "п"),
+			settings.getString("cypher6", "ш г х"),
+			settings.getString("cypher7", "с"),
+			settings.getString("cypher8", "в"),
+			settings.getString("cypher9", "д")
+		));
+	}
+
+
+
+	@Override
+	public View onCreateView(String name, @NonNull Context context, @NonNull AttributeSet attrs) {
+		return super.onCreateView(name, context, attrs);
+	}
+
+	@Override
     protected void onCreate(Bundle savedInstanceState) {
-         Utils.toDigits(123);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_activity);
+
+		loadSettings();
+		cypherView = new CypherView(cypher);
+		searchView = new SearchView();
+
+
 
          // Set up the action bar.
          final ActionBar actionBar = getActionBar();
@@ -93,8 +134,6 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 
     @Override
     public void onTabSelected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
-         // When the given tab is selected, switch to the corresponding page in
-         // the ViewPager.
          mViewPager.setCurrentItem(tab.getPosition());
     }
 
@@ -104,21 +143,27 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
     @Override
     public void onTabReselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {}
 
-    public class SectionsPagerAdapter extends FragmentPagerAdapter {
+	public class SectionsPagerAdapter extends FragmentPagerAdapter {
+		private Fragment prevFragment;
 
-         public SectionsPagerAdapter(FragmentManager fm) {
-             super(fm);
-         }
+		public SectionsPagerAdapter(FragmentManager fm) {
+			super(fm);
+		}
 
-         @Override
-         public Fragment getItem(int position) {
-             switch(position) {
-                 case 0: return new CypherFragment();
-                 case 1: return new SearchView();
-             }
-             throw new UnreachableOperationException();
-
-         }
+			@Override
+		public Fragment getItem(int position) {
+			Fragment fragment;
+			switch(position) {
+				case 0: fragment = cypherView; break;
+				case 1: fragment = searchView; break;
+				default: throw new UnreachableOperationException();
+			}
+			prevFragment = fragment;
+			if (prevFragment != null) {
+				((MyFragment)prevFragment).onLeave();
+			}
+			return fragment;
+			}
 
          @Override
          public int getCount() {

@@ -43,18 +43,28 @@ object Utils {
     Source.fromURL(url).getLines().toVector.map(_.toLowerCase)
   }
 
-  // def find(num: Int, words: Traversable[String], cipher: Cipher): List[String] = {
-  //   val digits = pad(toDigits(num), 2)
-  //   val result = ListBuffer[String]()
-  //   val letters = product(digits.map(cipher.get))
-  //   val regexs = letters.map(letters => new Regex("^[аоуэыийяёюеь]*" + letters.mkString("[аоуэыийяёюеь]*")))
-  //   words foreach { word =>
-  //     for((regex, letters) <- (regexs zip letters)) {
-  //       if (regex.findFirstIn(word).isDefined) {
-  //         result += highlight(word, letters)
-  //       }
-  //     }
-  //   }
-  //   result.sortBy(_.length).toList
-  // }
+  def parseRange(s: String): (Int, Int, Int) = {
+    val pattern1 = """^\s*(\d+)\s*$""".r
+    val pattern2 = """^\s*(\d+)\s+(\d+)\s*$""".r
+    s match {
+      case pattern1(x) => (x.toInt, x.toInt, x.length)
+      case pattern2(x, y) => (x.toInt, y.toInt, math.max(x.length, y.length))
+      case _ => null
+    }
+  }
+
+  def find(num: Int, words: Traversable[String], cypher: Cypher): List[String] = {
+     val digits = pad(toDigits(num), 2)
+     val result = ListBuffer[String]()
+     val letters = product(digits.map(cypher.get))
+     val regexs = letters.map(letters => new Regex("^[аоуэыийяёюеь]*" + letters.mkString("[аоуэыийяёюеь]*")))
+     words foreach { word =>
+       for((regex, letters) <- (regexs zip letters)) {
+         if (regex.findFirstIn(word).isDefined) {
+           result += highlight(word, letters)
+         }
+       }
+     }
+     result.sortBy(_.length).toList
+  }
 }

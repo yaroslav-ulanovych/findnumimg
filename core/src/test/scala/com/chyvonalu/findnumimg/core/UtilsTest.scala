@@ -1,9 +1,8 @@
 package com.chyvonalu.findnumimg.core
 
-import org.scalatest.matchers.ShouldMatchers
-import org.scalatest.FunSuite
+import org.scalatest.{Matchers, FunSuite}
 
-class UtilsTest extends FunSuite with ShouldMatchers {
+class UtilsTest extends FunSuite with Matchers {
   test("toDigits") {
     Utils.toDigits(123) shouldBe List(1, 2, 3)
     Utils.toDigits(1) shouldBe List(1)
@@ -30,5 +29,10 @@ class UtilsTest extends FunSuite with ShouldMatchers {
   test("highlight") {
     Utils.highlight("deepbluesky", List("d", "b", "s")) shouldBe "DeepBlueSky"
     Utils.highlight("blabla", List("bl", "bl")) shouldBe "BLaBLa"
+  }
+
+  test("parseRange") {
+    Utils.parseRange("0 999") shouldBe ((0, 999, 3))
+    Utils.parseRange("000") shouldBe ((0, 0, 3))
   }
 }
