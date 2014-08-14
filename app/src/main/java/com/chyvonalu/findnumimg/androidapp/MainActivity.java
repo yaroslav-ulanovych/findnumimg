@@ -12,36 +12,31 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.Fragment;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import android.view.View;
 import com.chyvonalu.findnumimg.core.Cypher;
 import com.chyvonalu.findnumimg.core.Cypher$;
-import com.chyvonalu.findnumimg.core.Utils;
+import com.chyvonalu.findnumimg.core.Dictionary;
+
+import java.io.InputStream;
+
 import scala.Tuple10;
+import scala.collection.Traversable;
 
 public class MainActivity extends FragmentActivity implements ActionBar.TabListener {
 
 	public CypherView cypherView;
 	public SearchView searchView;
+	public Traversable<String> dictionary;
 
 	private Cypher cypher;
 
-    /**
-      * The {@link android.support.v4.view.PagerAdapter} that will provide
-      * fragments for each of the sections. We use a
-      * {@link FragmentPagerAdapter} derivative, which will keep every
-      * loaded fragment in memory. If this becomes too memory intensive, it
-      * may be best to switch to a
-      * {@link android.support.v4.app.FragmentStatePagerAdapter}.
-      */
-    SectionsPagerAdapter mSectionsPagerAdapter;
+	SectionsPagerAdapter sectionsPagerAdapter;
 
-    /**
-      * The {@link ViewPager} that will host the section contents.
-      */
-    ViewPager mViewPager;
+	ViewPager viewPager;
 
 	public void loadSettings() {
 		SharedPreferences settings = getSharedPreferences("settings", MODE_PRIVATE);
@@ -57,6 +52,9 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 			settings.getString("cypher8", "в"),
 			settings.getString("cypher9", "д")
 		));
+
+		InputStream stream = getResources().openRawResource(R.raw.dict);
+		dictionary = Dictionary.load(stream);
 	}
 
 
@@ -67,116 +65,99 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 	}
 
 	@Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_activity);
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main_activity);
 
 		loadSettings();
 		cypherView = new CypherView(cypher);
-		searchView = new SearchView();
+		searchView = new SearchView(this);
+
+		final ActionBar actionBar = getActionBar();
+		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+
+		sectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+
+		viewPager = (ViewPager) findViewById(R.id.pager);
+		viewPager.setAdapter(sectionsPagerAdapter);
+
+		viewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+			private Integer prevPosition;
+			@Override
+			public void onPageSelected(int position) {
+				Log.d("PageChangeListener", String.format("position: %d", position));
+				if (prevPosition != null)
+					((MyFragment)sectionsPagerAdapter.getItem(prevPosition)).onLeave();
+				actionBar.setSelectedNavigationItem(position);
+				prevPosition = position;
+			}
+		});
+
+		for (int i = 0; i < sectionsPagerAdapter.getCount(); i++) {
+			actionBar.addTab(actionBar.newTab()
+				.setText(sectionsPagerAdapter.getPageTitle(i))
+				.setTabListener(this)
+			);
+		}
+
+		viewPager.setCurrentItem(1);
+	}
 
 
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		 getMenuInflater().inflate(R.menu.my_activity3, menu);
+		 return true;
+	}
 
-         // Set up the action bar.
-         final ActionBar actionBar = getActionBar();
-         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		 int id = item.getItemId();
+		 if (id == R.id.action_settings) {
+			 return true;
+		 }
+		 return super.onOptionsItemSelected(item);
+	}
 
-         // Create the adapter that will return a fragment for each of the three
-         // primary sections of the activity.
-         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+	@Override
+	public void onTabSelected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
+		Log.d("TabListener", String.format("tab: %d", tab.getPosition()));
+		viewPager.setCurrentItem(tab.getPosition());
+	}
 
-         // Set up the ViewPager with the sections adapter.
-         mViewPager = (ViewPager) findViewById(R.id.pager);
-         mViewPager.setAdapter(mSectionsPagerAdapter);
+	@Override
+	public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {}
 
-         // When swiping between different sections, select the corresponding
-         // tab. We can also use ActionBar.Tab#select() to do this if we have
-         // a reference to the Tab.
-         mViewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
-             @Override
-             public void onPageSelected(int position) {
-                 actionBar.setSelectedNavigationItem(position);
-             }
-         });
-
-         // For each of the sections in the app, add a tab to the action bar.
-         for (int i = 0; i < mSectionsPagerAdapter.getCount(); i++) {
-             // Create a tab with text corresponding to the page title defined by
-             // the adapter. Also specify this Activity object, which implements
-             // the TabListener interface, as the callback (listener) for when
-             // this tab is selected.
-             actionBar.addTab(
-                     actionBar.newTab()
-                             .setText(mSectionsPagerAdapter.getPageTitle(i))
-                             .setTabListener(this));
-         }
-    }
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-         // Inflate the menu; this adds items to the action bar if it is present.
-         getMenuInflater().inflate(R.menu.my_activity3, menu);
-         return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-         // Handle action bar item clicks here. The action bar will
-         // automatically handle clicks on the Home/Up button, so long
-         // as you specify a parent activity in AndroidManifest.xml.
-         int id = item.getItemId();
-         if (id == R.id.action_settings) {
-             return true;
-         }
-         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onTabSelected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
-         mViewPager.setCurrentItem(tab.getPosition());
-    }
-
-    @Override
-    public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {}
-
-    @Override
-    public void onTabReselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {}
+	@Override
+	public void onTabReselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {}
 
 	public class SectionsPagerAdapter extends FragmentPagerAdapter {
-		private Fragment prevFragment;
-
 		public SectionsPagerAdapter(FragmentManager fm) {
 			super(fm);
 		}
 
-			@Override
+		@Override
 		public Fragment getItem(int position) {
-			Fragment fragment;
+			Log.d("FragmentPagerAdapter", String.format("getItem: %d", position));
 			switch(position) {
-				case 0: fragment = cypherView; break;
-				case 1: fragment = searchView; break;
-				default: throw new UnreachableOperationException();
+				case 0: return cypherView;
+				case 1: return searchView;
 			}
-			prevFragment = fragment;
-			if (prevFragment != null) {
-				((MyFragment)prevFragment).onLeave();
-			}
-			return fragment;
-			}
+			throw new UnreachableOperationException();
+		}
 
-         @Override
-         public int getCount() {
-             return 2;
-         }
+		 @Override
+		 public int getCount() {
+			 return 2;
+		 }
 
-         @Override
-         public CharSequence getPageTitle(int position) {
-             switch (position) {
-                 case 0: return "Cypher";
-                 case 1: return "Search";
-             }
-             throw new UnreachableOperationException();
-         }
-    }
+		 @Override
+		 public CharSequence getPageTitle(int position) {
+			 switch (position) {
+				 case 0: return "Cypher";
+				 case 1: return "Search";
+			 }
+			 throw new UnreachableOperationException();
+		 }
+	}
 }

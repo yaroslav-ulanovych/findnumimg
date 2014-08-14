@@ -38,12 +38,7 @@ object Utils {
     result.toString
   }
 
-  def loadDict(): Traversable[String] = {
-    val url = getClass.getClassLoader.getResource("dict")
-    Source.fromURL(url).getLines().toVector.map(_.toLowerCase)
-  }
-
-  def parseRange(s: String): (Int, Int, Int) = {
+  def parseRange(s: String): (Integer, Integer, Integer) = {
     val pattern1 = """^\s*(\d+)\s*$""".r
     val pattern2 = """^\s*(\d+)\s+(\d+)\s*$""".r
     s match {
@@ -53,8 +48,8 @@ object Utils {
     }
   }
 
-  def find(num: Int, words: Traversable[String], cypher: Cypher): List[String] = {
-     val digits = pad(toDigits(num), 2)
+  def find(num: Int, width: Int, words: Traversable[String], cypher: Cypher): List[String] = {
+     val digits = pad(toDigits(num), width)
      val result = ListBuffer[String]()
      val letters = product(digits.map(cypher.get))
      val regexs = letters.map(letters => new Regex("^[аоуэыийяёюеь]*" + letters.mkString("[аоуэыийяёюеь]*")))
