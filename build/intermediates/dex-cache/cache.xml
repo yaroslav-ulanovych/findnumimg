@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<pre-dex-items>
+
+    <item
+        dex="/home/mahpella/work/findnumimg/app/build/intermediates/pre-dexed/debug/support-v13-19.1.0-d8844e21f41ca155a5c1f772b688abf13a0e2319.jar"
+        jar="/home/mahpella/bin/android-studio/sdk/extras/android/m2repository/com/android/support/support-v13/19.1.0/support-v13-19.1.0.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="6b852a232f642c75a7fdfc7212b841b8c8f8959c"/>
+    <item
+        dex="/home/mahpella/work/findnumimg/app/build/intermediates/pre-dexed/debug/scala-library-2.11.1-5ef51f77a0e02a80bc5ef026f9df5087081797c2.jar"
+        jar="/home/mahpella/.gradle/caches/modules-2/files-2.1/org.scala-lang/scala-library/2.11.1/e11da23da3eabab9f4777b9220e60d44c1aab6a/scala-library-2.11.1.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="0e11da23da3eabab9f4777b9220e60d44c1aab6a"/>
+    <item
+        dex="/home/mahpella/work/findnumimg/app/build/intermediates/pre-dexed/debug/core-08aa6a4dbab178121a8d18da9b3ddf77345ee652.jar"
+        jar="/home/mahpella/work/findnumimg/core/build/libs/core.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="e6d87777fdc86c1de510897e39de32aa95dfe6d2"/>
+    <item
+        dex="/home/mahpella/work/findnumimg/app/build/intermediates/pre-dexed/debug/support-v4-19.1.0-2b78c8f29f54286a747db5ceeecc6229f6929bfe.jar"
+        jar="/home/mahpella/bin/android-studio/sdk/extras/android/m2repository/com/android/support/support-v4/19.1.0/support-v4-19.1.0.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="85f201b380937e61a9dce6ca90ccf6872abbfb67"/>
+
+</pre-dex-items>
