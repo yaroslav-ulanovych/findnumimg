@@ -1,0 +1,3 @@
+package com.chyvonalu.findnumimg.androidapp
+
+class UnreachableOperationException extends RuntimeException
