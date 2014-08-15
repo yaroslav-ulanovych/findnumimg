@@ -31,11 +31,11 @@ import scala.collection.immutable.List;
 public class SearchView extends MyFragment {
 	private LinearLayout searchResultsView;
 	private EditText rangeInput;
-	private final MainActivity activity;
 
-	public SearchView(MainActivity activity) {
-		this.activity = activity;
-	}
+	public static final String TAG = "SearchView";
+
+
+	public SearchView() {}
 
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -54,7 +54,7 @@ public class SearchView extends MyFragment {
 			public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
 				if (actionId == EditorInfo.IME_ACTION_SEARCH) {
 					// hide keyboard
-					InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+					InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
 					imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
 
 					search();
@@ -65,12 +65,19 @@ public class SearchView extends MyFragment {
 		});
 
 		return view;
-    }
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		Log.d(TAG, "onEnter");
+	}
+
 
 	public void search() {
 		searchResultsView.removeAllViews();
-		Cypher cypher = activity.cypherView.getCypher();
-		Dictionary dictionary = activity.dictionary;
+		Cypher cypher = getMainActivity().cypher;
+		Dictionary dictionary = getMainActivity().dictionary;
 		Option<List<NumRange>> rangesOpt = RangeParser$.MODULE$.parse(rangeInput.getText().toString());
 		if (rangesOpt.isDefined()) {
 			List<NumRange> rangeList = rangesOpt.get();

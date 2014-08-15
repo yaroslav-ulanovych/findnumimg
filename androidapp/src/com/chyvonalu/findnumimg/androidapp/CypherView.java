@@ -12,75 +12,63 @@ import scala.Tuple10;
 
 
 public class CypherView extends MyFragment {
-	private EditText cypher0;
-	private EditText cypher1;
-	private EditText cypher2;
-	private EditText cypher3;
-	private EditText cypher4;
-	private EditText cypher5;
-	private EditText cypher6;
-	private EditText cypher7;
-	private EditText cypher8;
-	private EditText cypher9;
+	public CypherView() {}
 
-	private Cypher cypher;
+	public static final String TAG = "CypherView";
 
-	public CypherView(Cypher cypher) {
-		this.cypher = cypher;
+	public EditText[] getInputs() {
+		View view = getView();
+		return new EditText[]{
+			(EditText) view.findViewById(R.id.cypher0),
+			(EditText) view.findViewById(R.id.cypher1),
+			(EditText) view.findViewById(R.id.cypher2),
+			(EditText) view.findViewById(R.id.cypher3),
+			(EditText) view.findViewById(R.id.cypher4),
+			(EditText) view.findViewById(R.id.cypher5),
+			(EditText) view.findViewById(R.id.cypher6),
+			(EditText) view.findViewById(R.id.cypher7),
+			(EditText) view.findViewById(R.id.cypher8),
+			(EditText) view.findViewById(R.id.cypher9)
+		};
 	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-	View view = inflater.inflate(R.layout.cypher_view, container, false);
-		cypher0 = (EditText) view.findViewById(R.id.cypher0);
-		cypher1 = (EditText) view.findViewById(R.id.cypher1);
-		cypher2 = (EditText) view.findViewById(R.id.cypher2);
-		cypher3 = (EditText) view.findViewById(R.id.cypher3);
-		cypher4 = (EditText) view.findViewById(R.id.cypher4);
-		cypher5 = (EditText) view.findViewById(R.id.cypher5);
-		cypher6 = (EditText) view.findViewById(R.id.cypher6);
-		cypher7 = (EditText) view.findViewById(R.id.cypher7);
-		cypher8 = (EditText) view.findViewById(R.id.cypher8);
-		cypher9 = (EditText) view.findViewById(R.id.cypher9);
-
-		updateView();
-		return view;
-	}
-
-	public void updateView() {
-		cypher0.setText(cypher.get(0).mkString(" "));
-		cypher1.setText(cypher.get(1).mkString(" "));
-		cypher2.setText(cypher.get(2).mkString(" "));
-		cypher3.setText(cypher.get(3).mkString(" "));
-		cypher4.setText(cypher.get(4).mkString(" "));
-		cypher5.setText(cypher.get(5).mkString(" "));
-		cypher6.setText(cypher.get(6).mkString(" "));
-		cypher7.setText(cypher.get(7).mkString(" "));
-		cypher8.setText(cypher.get(8).mkString(" "));
-		cypher9.setText(cypher.get(9).mkString(" "));
-	}
-
-	public void updateModel() {
-		cypher = Cypher$.MODULE$.buildFromStrings(Tuple10.apply(
-			cypher0.getText().toString(),
-			cypher1.getText().toString(),
-			cypher2.getText().toString(),
-			cypher3.getText().toString(),
-			cypher4.getText().toString(),
-			cypher5.getText().toString(),
-			cypher6.getText().toString(),
-			cypher7.getText().toString(),
-			cypher8.getText().toString(),
-			cypher9.getText().toString()
-		));
+		return inflater.inflate(R.layout.cypher_view, container, false);
 	}
 
 	@Override
-	public void onLeave() {
-		updateModel();
+	public void onResume() {
+		super.onResume();
+		Log.d(TAG, "onEnter");
 	}
 
-	public Cypher getCypher() {
-		return cypher;
+
+	public void updateView() {
+		Cypher cypher = getMainActivity().cypher;
+		EditText[] inputs = getInputs();
+		for (int i = 0; i < 10; i++) {
+			inputs[i].setText(cypher.get(i).mkString(" "));
+		}
 	}
+
+	public void updateModel() {
+		EditText[] inputs = getInputs();
+		String s0 = inputs[0].getText().toString();
+		String s1 = inputs[1].getText().toString();
+		getMainActivity().cypher = Cypher$.MODULE$.buildFromStrings(Tuple10.apply(
+				s0,
+				s1,
+				inputs[2].getText().toString(),
+				inputs[3].getText().toString(),
+				inputs[4].getText().toString(),
+				inputs[5].getText().toString(),
+				inputs[6].getText().toString(),
+				inputs[7].getText().toString(),
+				inputs[8].getText().toString(),
+				inputs[9].getText().toString()
+		));
+	}
+
+
 }

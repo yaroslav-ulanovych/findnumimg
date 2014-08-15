@@ -26,11 +26,9 @@ import scala.collection.Traversable;
 
 public class MainActivity extends FragmentActivity implements ActionBar.TabListener {
 
-	public CypherView cypherView;
-	public SearchView searchView;
 	public Dictionary dictionary;
 
-	private Cypher cypher;
+	public Cypher cypher;
 
 	SectionsPagerAdapter sectionsPagerAdapter;
 
@@ -50,12 +48,18 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 			settings.getString("cypher8", "в"),
 			settings.getString("cypher9", "д")
 		));
-
 		InputStream stream = getResources().openRawResource(R.raw.dict);
 		dictionary = Dictionary$.MODULE$.load(Utils.inputStreamToLowerCaseStrings(stream));
 	}
 
 
+	public SearchView getSearchView() {
+		return (SearchView) getSupportFragmentManager().findFragmentById(R.layout.search_view);
+	}
+
+	public CypherView getCypherView() {
+		return (CypherView) getSupportFragmentManager().findFragmentById(R.layout.cypher_view);
+	}
 
 	@Override
 	public View onCreateView(String name, @NonNull Context context, @NonNull AttributeSet attrs) {
@@ -68,8 +72,6 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 		setContentView(R.layout.activity_main_activity);
 
 		loadSettings();
-		cypherView = new CypherView(cypher);
-		searchView = new SearchView(this);
 
 		final ActionBar actionBar = getActionBar();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
@@ -80,13 +82,23 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 		viewPager.setAdapter(sectionsPagerAdapter);
 
 		viewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
-			private Integer prevPosition;
+			private int prevPosition = -1;
 			@Override
 			public void onPageSelected(int position) {
 				Log.d("PageChangeListener", String.format("position: %d", position));
-				if (prevPosition != null)
-					((MyFragment)sectionsPagerAdapter.getItem(prevPosition)).onLeave();
+
 				actionBar.setSelectedNavigationItem(position);
+
+//				switch(prevPosition) {
+//					case 0: getCypherView().onLeave();
+//					case 1: getSearchView().onLeave();
+//				}
+//
+//				switch(position) {
+//					case 0: getCypherView().onEnter();
+//					case 1: getSearchView().onEnter();
+//				}
+
 				prevPosition = position;
 			}
 		});
@@ -97,10 +109,13 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 				.setTabListener(this)
 			);
 		}
-
-		viewPager.setCurrentItem(1);
 	}
 
+	@Override
+	protected void onResume() {
+		super.onResume();
+		viewPager.setCurrentItem(1);
+	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -138,8 +153,8 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 		public Fragment getItem(int position) {
 			Log.d("FragmentPagerAdapter", String.format("getItem: %d", position));
 			switch(position) {
-				case 0: return cypherView;
-				case 1: return searchView;
+				case 0: return new CypherView();
+				case 1: return new SearchView();
 			}
 			throw new UnreachableOperationException();
 		}
