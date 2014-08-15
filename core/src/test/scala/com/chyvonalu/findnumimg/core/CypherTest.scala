@@ -24,4 +24,10 @@ class CypherTest extends FunSuite with Matchers {
     cypher.get(8) shouldBe List("в")
     cypher.get(9) shouldBe List("д")
   }
+
+  test("encode") {
+    val cypher = Cypher.buildFromStrings(("н", "м", "б", "т", "ч к", "п", "ш г х", "с", "в", "д"))
+    cypher.encode(List(4, 6)) shouldBe List("чш", "чг", "чх", "кш", "кг", "кх")
+    cypher.encode(List(0)) shouldBe List("н")
+  }
 }

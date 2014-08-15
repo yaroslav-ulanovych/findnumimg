@@ -1,5 +1,7 @@
 package com.chyvonalu.findnumimg.core
 
+import java.io.InputStream
+
 import scala.collection.mutable.ListBuffer
 import scala.io.Source
 import scala.util.matching.Regex
@@ -55,18 +57,21 @@ object Utils {
 
   def toConsonants(s: String) = s.filter(isConsonant)
 
-  def find(num: Int, width: Int, words: Traversable[String], cypher: Cypher): List[String] = {
-     val digits = pad(toDigits(num), width)
-     val result = ListBuffer[String]()
-     val letters = product(digits.map(cypher.get))
-     val regexs = letters.map(letters => new Regex("^[аоуэыийяёюеь]*" + letters.mkString("[аоуэыийяёюеь]*")))
-     words foreach { word =>
-       for((regex, letters) <- (regexs zip letters)) {
-         if (regex.findFirstIn(word).isDefined) {
-           result += highlight(word, letters)
-         }
-       }
-     }
-     result.sortBy(_.length).toList
+
+
+  def find(num: Int, width: Int, dictionary: Dictionary, cypher: Cypher): List[String] = {
+    val digits = pad(toDigits(num), width)
+    val keys = cypher.encode(digits)
+    keys.map(key => (key, dictionary.get(key))).map({
+      case (key, values) => {
+        val x = key.split("").drop(1).toList
+        values.map(value => highlight(value, x))
+      }
+    }).flatten.sortBy(_.length)
   }
+
+  def inputStreamToLowerCaseStrings(stream: InputStream): Traversable[String] = {
+    Source.fromInputStream(stream).getLines().toVector.map(_.toLowerCase)
+  }
+
 }

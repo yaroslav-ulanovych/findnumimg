@@ -38,5 +38,6 @@ class UtilsTest extends FunSuite with Matchers {
 
   test("toConsonants") {
     Utils.toConsonants("авокадо") shouldBe "вкд"
+    Utils.toConsonants("ааоуэыи") shouldBe ""
   }
 }

@@ -17,9 +17,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import android.view.View;
-import com.chyvonalu.findnumimg.core.Cypher;
-import com.chyvonalu.findnumimg.core.Cypher$;
-import com.chyvonalu.findnumimg.core.Dictionary;
+import com.chyvonalu.findnumimg.core.*;
 
 import java.io.InputStream;
 
@@ -30,7 +28,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 
 	public CypherView cypherView;
 	public SearchView searchView;
-	public Traversable<String> dictionary;
+	public Dictionary dictionary;
 
 	private Cypher cypher;
 
@@ -54,7 +52,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 		));
 
 		InputStream stream = getResources().openRawResource(R.raw.dict);
-		dictionary = Dictionary.load(stream);
+		dictionary = Dictionary$.MODULE$.load(Utils.inputStreamToLowerCaseStrings(stream));
 	}
 
 

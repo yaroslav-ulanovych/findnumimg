@@ -20,6 +20,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.chyvonalu.findnumimg.core.Cypher;
+import com.chyvonalu.findnumimg.core.Dictionary;
 import com.chyvonalu.findnumimg.core.Utils;
 
 import scala.Function1;
@@ -70,7 +71,7 @@ public class SearchView extends MyFragment {
 	public void search() {
 		searchResultsView.removeAllViews();
 		Cypher cypher = activity.cypherView.getCypher();
-		Traversable<String> dictionary = activity.dictionary;
+		Dictionary dictionary = activity.dictionary;
 		Tuple3<Integer, Integer, Integer> range = Utils.parseRange(rangeInput.getText().toString());
 		if (range != null) {
 			int from = Math.min(range._1(), range._2());
