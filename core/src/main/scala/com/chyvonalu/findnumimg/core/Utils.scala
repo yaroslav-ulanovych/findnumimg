@@ -40,16 +40,6 @@ object Utils {
     result.toString
   }
 
-  def parseRange(s: String): (Integer, Integer, Integer) = {
-    val pattern1 = """^\s*(\d+)\s*$""".r
-    val pattern2 = """^\s*(\d+)\s+(\d+)\s*$""".r
-    s match {
-      case pattern1(x) => (x.toInt, x.toInt, x.length)
-      case pattern2(x, y) => (x.toInt, y.toInt, math.max(x.length, y.length))
-      case _ => null
-    }
-  }
-
   def isConsonant(x: Char) = x match {
     case 'б'|'в'|'г'|'д'|'ж'|'з'|'к'|'л'|'м'|'н'|'п'|'р'|'с'|'т'|'ф'|'х'|'ц'|'ч'|'ш'|'щ' => true
     case _ => false

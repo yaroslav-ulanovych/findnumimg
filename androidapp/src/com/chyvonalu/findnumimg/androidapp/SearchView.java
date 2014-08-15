@@ -19,11 +19,10 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.chyvonalu.findnumimg.core.Cypher;
-import com.chyvonalu.findnumimg.core.Dictionary;
-import com.chyvonalu.findnumimg.core.Utils;
+import com.chyvonalu.findnumimg.core.*;
 
 import scala.Function1;
+import scala.Option;
 import scala.Tuple3;
 import scala.collection.Iterator;
 import scala.collection.Traversable;
@@ -72,33 +71,39 @@ public class SearchView extends MyFragment {
 		searchResultsView.removeAllViews();
 		Cypher cypher = activity.cypherView.getCypher();
 		Dictionary dictionary = activity.dictionary;
-		Tuple3<Integer, Integer, Integer> range = Utils.parseRange(rangeInput.getText().toString());
-		if (range != null) {
-			int from = Math.min(range._1(), range._2());
-			int to = Math.max(range._1(), range._2());
-			int width = range._3();
-			for(int i = from; i <= to; i++) {
+		Option<List<NumRange>> rangesOpt = RangeParser$.MODULE$.parse(rangeInput.getText().toString());
+		if (rangesOpt.isDefined()) {
+			List<NumRange> rangeList = rangesOpt.get();
+			Iterator<NumRange> rangeIterator = rangeList.iterator();
+			while(rangeIterator.hasNext()) {
+				NumRange range = rangeIterator.next();
 
-				TextView textView = new TextView(searchResultsView.getContext());
-				SpannableString string = new SpannableString(String.format("%0" + width + "d", i));
-				string.setSpan(new StyleSpan(Typeface.BOLD), 0, string.length(), 0);
-				string.setSpan(new UnderlineSpan(), 0, string.length(), 0);
-				textView.setText(string);
-				textView.setPadding(0, 16, 0, 0);
-				searchResultsView.addView(textView);
+				int from = Math.min(range.from(), range.to());
+				int to = Math.max(range.from(), range.to());
+				int width = range.width();
+				for (int i = from; i <= to; i++) {
 
-				long before = System.currentTimeMillis();
-				List<String> list = Utils.find(i, width, dictionary, cypher);
-				long after = System.currentTimeMillis();
-				Log.d("search", String.format("%dms", after - before));
-
-				Iterator<String> iterator = list.iterator();
-				while(iterator.hasNext()) {
-					String s = iterator.next();
-
-					textView = new TextView(searchResultsView.getContext());
-					textView.setText(s);
+					TextView textView = new TextView(searchResultsView.getContext());
+					SpannableString string = new SpannableString(String.format("%0" + width + "d", i));
+					string.setSpan(new StyleSpan(Typeface.BOLD), 0, string.length(), 0);
+					string.setSpan(new UnderlineSpan(), 0, string.length(), 0);
+					textView.setText(string);
+					textView.setPadding(0, 16, 0, 0);
 					searchResultsView.addView(textView);
+
+					long before = System.currentTimeMillis();
+					List<String> list = Utils.find(i, width, dictionary, cypher);
+					long after = System.currentTimeMillis();
+					Log.d("search", String.format("%dms", after - before));
+
+					Iterator<String> iterator = list.iterator();
+					while (iterator.hasNext()) {
+						String s = iterator.next();
+
+						textView = new TextView(searchResultsView.getContext());
+						textView.setText(s);
+						searchResultsView.addView(textView);
+					}
 				}
 			}
 		}
