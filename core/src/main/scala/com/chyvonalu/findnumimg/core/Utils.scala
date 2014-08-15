@@ -48,6 +48,13 @@ object Utils {
     }
   }
 
+  def isConsonant(x: Char) = x match {
+    case 'б'|'в'|'г'|'д'|'ж'|'з'|'к'|'л'|'м'|'н'|'п'|'р'|'с'|'т'|'ф'|'х'|'ц'|'ч'|'ш'|'щ' => true
+    case _ => false
+  }
+
+  def toConsonants(s: String) = s.filter(isConsonant)
+
   def find(num: Int, width: Int, words: Traversable[String], cypher: Cypher): List[String] = {
      val digits = pad(toDigits(num), width)
      val result = ListBuffer[String]()

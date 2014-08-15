@@ -35,4 +35,8 @@ class UtilsTest extends FunSuite with Matchers {
     Utils.parseRange("0 999") shouldBe ((0, 999, 3))
     Utils.parseRange("000") shouldBe ((0, 0, 3))
   }
+
+  test("toConsonants") {
+    Utils.toConsonants("авокадо") shouldBe "вкд"
+  }
 }
