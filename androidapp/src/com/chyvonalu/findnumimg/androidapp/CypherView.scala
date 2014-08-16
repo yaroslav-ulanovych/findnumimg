@@ -1,5 +1,6 @@
 package com.chyvonalu.findnumimg.androidapp
 
+import android.app.Activity
 import android.content.{SharedPreferences, Context}
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,17 +12,23 @@ import com.chyvonalu.findnumimg.core.Cypher
 class CypherView() extends MyFragment() {
   val TAG = "CypherView"
   debug("<init>()")
+
+  private var inputs: Seq[EditText] = _
   
-  def getInputs = {
-    val view = getView
-    val ids = List(R.id.cypher0, R.id.cypher1, R.id.cypher2, R.id.cypher3, R.id.cypher4, R.id.cypher5, R.id.cypher6, R.id.cypher7, R.id.cypher8, R.id.cypher9)
-    ids.map(id => view.findViewById(id).asInstanceOf[EditText])
-  }
-
   override def onCreateView(inflater: LayoutInflater, container: ViewGroup, savedInstanceState: Bundle): View = {
-    return inflater.inflate(R.layout.cypher_view, container, false)
+    super.onCreateView(inflater, container, savedInstanceState)
+    val view = inflater.inflate(R.layout.cypher_view, container, false)
+    val ids = List(R.id.cypher0, R.id.cypher1, R.id.cypher2, R.id.cypher3, R.id.cypher4, R.id.cypher5, R.id.cypher6, R.id.cypher7, R.id.cypher8, R.id.cypher9)
+    inputs = ids.map(id => view.findViewById(id).asInstanceOf[EditText])
+    debug("inputs: " + inputs)
+    view
   }
 
+
+  override def onAttach(activity: Activity): Unit = {
+    super.onAttach(activity)
+    activity.asInstanceOf[MainActivity].cypherView = this
+  }
 
   override def onResume(): Unit = {
     super.onResume()
@@ -34,7 +41,7 @@ class CypherView() extends MyFragment() {
       vv
     }
 
-    val cypher = Cypher.buildFromStrings((
+    val cypher = Cypher.buildFromStrings(List(
       get("cypher0", "н"),
       get("cypher1", "м"),
       get("cypher2", "б"),
@@ -47,7 +54,7 @@ class CypherView() extends MyFragment() {
       get("cypher9", "д")
     ))
 
-    getInputs.zipWithIndex.foreach({
+    inputs.zipWithIndex.foreach({
       case (input, i) => input.setText(cypher.get(i).mkString(" "))
     })
   }
@@ -56,10 +63,9 @@ class CypherView() extends MyFragment() {
   override def onPause(): Unit = {
     super.onPause()
     val preferences = getActivity.getSharedPreferences("settings", Context.MODE_PRIVATE).edit()
-    val inputs = getInputs
     inputs.zipWithIndex.foreach({case (input, i) => {
       val key = "cypher" + i
-      val value = inputs(i).getText.toString
+      val value = input.getText.toString
       debug(s"save $key: $value")
       preferences.putString(key, value)
     }})
@@ -68,8 +74,8 @@ class CypherView() extends MyFragment() {
   }
 
   def getCypher: Cypher = {
-    val xs = getInputs.map(_.getText.toString)
-    Cypher.buildFromStrings((xs(0), xs(1), xs(2), xs(3), xs(4), xs(5), xs(6), xs(7), xs(8), xs(9)))
+    val xs = inputs.map(_.getText.toString)
+    Cypher.buildFromStrings(xs)
   }
 }
 

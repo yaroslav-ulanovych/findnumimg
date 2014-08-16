@@ -2,6 +2,7 @@ package com.chyvonalu.findnumimg.androidapp
 
 import java.io.InputStream
 
+import android.app.Activity
 import android.content.Context
 import android.graphics.Paint
 import android.graphics.Typeface
@@ -53,7 +54,6 @@ class SearchView extends MyFragment {
     })
     return view
   }
-
 
   override def onResume() {
     super.onResume()

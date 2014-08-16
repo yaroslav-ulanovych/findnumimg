@@ -11,9 +11,9 @@ trait Cypher {
 object Cypher {
   def splitString(s: String): List[String] = s.split("""\s+""").toList
 
-  def buildFromStrings(xs: (String, String, String, String, String, String, String, String, String, String)): Cypher = {
+  def buildFromStrings(xs: Seq[String]): Cypher = {
     new Cypher {
-      override def get(x: Int): List[String] = splitString(xs.productElement(x).asInstanceOf[String])
+      override def get(x: Int): List[String] = splitString(xs.lift(x).getOrElse(""))
     }
   }
 }

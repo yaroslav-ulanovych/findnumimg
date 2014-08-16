@@ -12,7 +12,7 @@ class CypherTest extends FunSuite with Matchers {
   }
 
   test("buildFromStrings") {
-    val cypher = Cypher.buildFromStrings(("н", "м", "б", "т", "ч к", "п", "ш г х", "с", "в", "д"))
+    val cypher = Cypher.buildFromStrings(List("н", "м", "б", "т", "ч к", "п", "ш г х", "с", "в", "д"))
     cypher.get(0) shouldBe List("н")
     cypher.get(1) shouldBe List("м")
     cypher.get(2) shouldBe List("б")
@@ -26,7 +26,7 @@ class CypherTest extends FunSuite with Matchers {
   }
 
   test("encode") {
-    val cypher = Cypher.buildFromStrings(("н", "м", "б", "т", "ч к", "п", "ш г х", "с", "в", "д"))
+    val cypher = Cypher.buildFromStrings(List("н", "м", "б", "т", "ч к", "п", "ш г х", "с", "в", "д"))
     cypher.encode(List(4, 6)) shouldBe List("чш", "чг", "чх", "кш", "кг", "кх")
     cypher.encode(List(0)) shouldBe List("н")
   }

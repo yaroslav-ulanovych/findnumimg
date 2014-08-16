@@ -16,8 +16,8 @@ class MainActivity extends FragmentActivity with ActionBarTabAdapter with HasLog
   val TAG = "MainActivity"
   debug("<init>()")
 
-  val cypherView = new CypherView
-  val searchView = new SearchView
+  var cypherView: CypherView = _
+  var searchView: SearchView = _
   private var viewPager: ViewPager = _
 
   override def onCreateView(name: String, context: Context, attrs: AttributeSet): View = {
@@ -56,8 +56,8 @@ class MainActivity extends FragmentActivity with ActionBarTabAdapter with HasLog
     def getItem(position: Int): Fragment = {
       debug(s"FragmentPagerAdapter.getItem: $position")
       position match {
-        case 0 => cypherView
-        case 1 => searchView
+        case 0 => new CypherView
+        case 1 => new SearchView
         case _ => throw new UnreachableOperationException
       }
     }
