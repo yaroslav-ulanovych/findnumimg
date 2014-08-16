@@ -1,154 +1,191 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent" >
-    
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp"
-        android:orientation="vertical" >
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:padding="16dp"
+>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal" >
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="0" />
-            <EditText android:id="@+id/cypher0"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:singleLine="true" />
-        </LinearLayout>
+	<ScrollView
+		android:id="@+id/frequencies_view"
+		android:layout_width="wrap_content"
+		android:layout_height="match_parent"
+		android:layout_alignParentRight="true"
+	>
+		<LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:orientation="vertical">
+			<TextView style="@style/FrequencyTableItem" android:text="н - 6.35%"/>
+			<TextView style="@style/FrequencyTableItem" android:text="т - 6.30%"/>
+			<TextView style="@style/FrequencyTableItem" android:text="р - 5.53%"/>
+			<TextView style="@style/FrequencyTableItem" android:text="с - 5.45%"/>
+			<TextView style="@style/FrequencyTableItem" android:text="л - 4.32%"/>
+			<TextView style="@style/FrequencyTableItem" android:text="в - 4.19%"/>
+			<TextView style="@style/FrequencyTableItem" android:text="к - 3.47%"/>
+			<TextView style="@style/FrequencyTableItem" android:text="п - 3.35%"/>
+			<TextView style="@style/FrequencyTableItem" android:text="м - 3.29%"/>
+			<TextView style="@style/FrequencyTableItem" android:text="д - 2.56%"/>
+			<TextView style="@style/FrequencyTableItem" android:text="з - 1.81%"/>
+			<TextView style="@style/FrequencyTableItem" android:text="б - 1.51%"/>
+			<TextView style="@style/FrequencyTableItem" android:text="г - 1.41%"/>
+			<TextView style="@style/FrequencyTableItem" android:text="ч - 1.27%"/>
+			<TextView style="@style/FrequencyTableItem" android:text="х - 0.92%"/>
+			<TextView style="@style/FrequencyTableItem" android:text="ж - 0.78%"/>
+			<TextView style="@style/FrequencyTableItem" android:text="ш - 0.77%"/>
+			<TextView style="@style/FrequencyTableItem" android:text="ц - 0.52%"/>
+			<TextView style="@style/FrequencyTableItem" android:text="щ - 0.49%"/>
+			<TextView style="@style/FrequencyTableItem" android:text="ф - 0.40%"/>
+		</LinearLayout>
+	</ScrollView>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="1" />
-            <EditText android:id="@+id/cypher1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:singleLine="true" />
-        </LinearLayout>
+	<ScrollView
+		android:layout_width="wrap_content"
+		android:layout_height="match_parent"
+		android:layout_alignParentLeft="true"
+		android:layout_toLeftOf="@id/frequencies_view"
+	>
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:orientation="vertical" >
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="2" />
-            <EditText android:id="@+id/cypher2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:singleLine="true" />
-        </LinearLayout>
+<LinearLayout
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:orientation="horizontal" >
+<TextView
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:text="0" />
+<EditText android:id="@+id/cypher0"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:singleLine="true" />
+</LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="3" />
-            <EditText android:id="@+id/cypher3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:singleLine="true" />
-        </LinearLayout>
+<LinearLayout
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:orientation="horizontal">
+<TextView
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:text="1" />
+<EditText android:id="@+id/cypher1"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:singleLine="true" />
+</LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="4" />
-            <EditText android:id="@+id/cypher4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:singleLine="true" />
-        </LinearLayout>
+<LinearLayout
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:orientation="horizontal">
+<TextView
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:text="2" />
+<EditText android:id="@+id/cypher2"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:singleLine="true" />
+</LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="5" />
-            <EditText android:id="@+id/cypher5"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:singleLine="true" />
-        </LinearLayout>
+<LinearLayout
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:orientation="horizontal">
+<TextView
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:text="3" />
+<EditText android:id="@+id/cypher3"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:singleLine="true" />
+</LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="6" />
-            <EditText android:id="@+id/cypher6"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:singleLine="true" />
-        </LinearLayout>
+<LinearLayout
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:orientation="horizontal">
+<TextView
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:text="4" />
+<EditText android:id="@+id/cypher4"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:singleLine="true" />
+</LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="7" />
-            <EditText android:id="@+id/cypher7"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:singleLine="true" />
-        </LinearLayout>
+<LinearLayout
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:orientation="horizontal">
+<TextView
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:text="5" />
+<EditText android:id="@+id/cypher5"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:singleLine="true" />
+</LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="8" />
-            <EditText android:id="@+id/cypher8"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:singleLine="true" />
-        </LinearLayout>
+<LinearLayout
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:orientation="horizontal">
+<TextView
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:text="6" />
+<EditText android:id="@+id/cypher6"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:singleLine="true" />
+</LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="9" />
-            <EditText android:id="@+id/cypher9"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:singleLine="true" />
-        </LinearLayout>
+<LinearLayout
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:orientation="horizontal">
+<TextView
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:text="7" />
+<EditText android:id="@+id/cypher7"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:singleLine="true" />
+</LinearLayout>
 
-    </LinearLayout>
-</ScrollView>
+<LinearLayout
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:orientation="horizontal">
+<TextView
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:text="8" />
+<EditText android:id="@+id/cypher8"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:singleLine="true" />
+</LinearLayout>
+
+<LinearLayout
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:orientation="horizontal">
+<TextView
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:text="9" />
+<EditText android:id="@+id/cypher9"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:singleLine="true" />
+</LinearLayout>
+
+		</LinearLayout>
+	</ScrollView>
+</RelativeLayout>

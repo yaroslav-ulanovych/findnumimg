@@ -64,39 +64,32 @@ class SearchView extends MyFragment {
   def search {
     searchResultsView.removeAllViews
     val cypher = getMainActivity.cypherView.getCypher
-    val rangesOpt = RangeParser.parse(rangeInput.getText.toString)
-    if (rangesOpt.isDefined) {
-      val rangeList: List[NumRange] = rangesOpt.get
-      val rangeIterator: Iterator[NumRange] = rangeList.iterator
-      while (rangeIterator.hasNext) {
-        val range: NumRange = rangeIterator.next
-        val from: Int = Math.min(range.from, range.to)
-        val to: Int = Math.max(range.from, range.to)
-        val width: Int = range.width
-        var i: Int = from
-        while (i <= to) {
-          var textView: TextView = new TextView(searchResultsView.getContext)
-          val string: SpannableString = new SpannableString(String.format("%0" + width + "d", new Integer(i)))
-          string.setSpan(new StyleSpan(Typeface.BOLD), 0, string.length, 0)
-          string.setSpan(new UnderlineSpan, 0, string.length, 0)
-          textView.setText(string)
-          textView.setPadding(0, 16, 0, 0)
-          searchResultsView.addView(textView)
-          val before: Long = System.currentTimeMillis
-          val list: List[String] = Utils.find(i, width, dictionary, cypher)
-          val after: Long = System.currentTimeMillis
-          Log.d("search", s"${after - before}ms")
-          val iterator: Iterator[String] = list.iterator
-          while (iterator.hasNext) {
-            val s: String = iterator.next
-            textView = new TextView(searchResultsView.getContext)
-            textView.setText(s)
+
+    val inflater = getActivity.getLayoutInflater
+
+    RangeParser.parse(rangeInput.getText.toString) match {
+      case Some(ranges) => {
+        ranges.map(_.normalize) foreach { range =>
+          val width = range.width
+          for(i <- range.from to range.to) {
+            val textView = inflater.inflate(R.layout.search_results_header, null).asInstanceOf[TextView]
+            textView.setText(String.format("%0" + width + "d", new Integer(i)))
             searchResultsView.addView(textView)
+            val before = System.currentTimeMillis
+            val list = Utils.find(i, width, dictionary, cypher)
+            val after = System.currentTimeMillis
+            Log.d("search", s"${after - before}ms")
+            list foreach { s =>
+              val textView = inflater.inflate(R.layout.search_results_item, null).asInstanceOf[TextView]
+              textView.setText(s)
+              searchResultsView.addView(textView)
+            }
           }
-          i += 1
         }
       }
+      case None =>
     }
+
   }
 
   private var searchResultsView: LinearLayout = null
