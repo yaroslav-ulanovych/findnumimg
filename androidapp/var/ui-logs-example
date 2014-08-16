@@ -1,0 +1,159 @@
+launch
+
+13:53:13.514     MainActivity    <init>()
+13:53:13.520     MainActivity    onCreate
+13:53:16.141     MainActivity    onTabSelected: 0
+13:53:16.143     MainActivity    onStart
+13:53:16.143     MainActivity    onPostCreate
+13:53:16.144     MainActivity    onResume
+13:53:16.144     MainActivity    onPageSelected: 1
+13:53:16.144     MainActivity    onTabSelected: 1
+13:53:16.144     MainActivity    onPostResume
+13:53:16.154     MainActivity    onAttachedToWindow
+13:53:16.178     MainActivity    FragmentPagerAdapter.getItem: 1
+13:53:16.179     SearchView      <init>()
+13:53:16.180     MainActivity    FragmentPagerAdapter.getItem: 0
+13:53:16.180     CypherView      <init>()
+13:53:16.181     SearchView      onAttach
+13:53:16.181     SearchView      onCreate
+13:53:16.191     SearchView      onViewCreated
+13:53:16.191     SearchView      onActivityCreated
+13:53:16.191     SearchView      onViewStateRestored
+13:53:16.191     SearchView      onStart
+13:53:16.191     SearchView      onResume
+13:53:16.191     CypherView      onAttach
+13:53:16.192     CypherView      onCreate
+13:53:16.344     CypherView      onViewCreated
+13:53:16.344     CypherView      onActivityCreated
+13:53:16.345     CypherView      onViewStateRestored
+13:53:16.345     CypherView      onStart
+13:53:16.345     CypherView      onResume
+13:53:16.395     MainActivity    onWindowFocusChanged: true
+
+home button
+
+13:55:18.797     MainActivity    onUserLeaveHint
+13:55:18.799     SearchView      onSaveInstanceState
+13:55:18.800     CypherView      onSaveInstanceState
+13:55:18.814     MainActivity    onSaveInstanceState
+13:55:18.816     SearchView      onPause
+13:55:18.816     CypherView      onPause
+13:55:18.816     MainActivity    onPause
+13:55:18.848     MainActivity    onWindowFocusChanged: false
+13:55:19.672     SearchView      onStop
+13:55:19.672     CypherView      onStop
+13:55:19.672     MainActivity    onStop
+
+return after home button
+
+13:55:44.460     MainActivity    onRestart
+13:55:44.460     SearchView      onStart
+13:55:44.460     CypherView      onStart
+13:55:44.460     MainActivity    onStart
+13:55:44.461     MainActivity    onResume
+13:55:44.461     SearchView      onResume
+13:55:44.461     CypherView      onResume
+13:55:44.461     MainActivity    onPostResume
+13:55:44.768     MainActivity    onWindowFocusChanged: true
+
+back button
+
+13:57:17.767     MainActivity    onBackPressed
+13:57:17.768     SearchView      onPause
+13:57:17.768     CypherView      onPause
+13:57:17.768     MainActivity    onPause
+13:57:17.791     MainActivity    onWindowFocusChanged: false
+13:57:18.397     SearchView      onStop
+13:57:18.397     CypherView      onStop
+13:57:18.397     MainActivity    onStop
+13:57:18.401     SearchView      onDestroyView
+13:57:18.402     SearchView      onDestroy
+13:57:18.402     SearchView      onDetach
+13:57:18.402     CypherView      onDestroyView
+13:57:18.425     CypherView      onDestroy
+13:57:18.425     CypherView      onDetach
+13:57:18.425     MainActivity    onDestroy
+13:57:18.428     MainActivity    onDetachedFromWindow
+
+return after back button
+
+13:57:39.703     MainActivity    <init>()
+13:57:39.703     MainActivity    onCreate
+13:57:41.203     MainActivity    onTabSelected: 0
+13:57:41.205     MainActivity    onStart
+13:57:41.205     MainActivity    onPostCreate
+13:57:41.205     MainActivity    onResume
+13:57:41.205     MainActivity    onPageSelected: 1
+13:57:41.206     MainActivity    onTabSelected: 1
+13:57:41.206     MainActivity    onPostResume
+13:57:41.211     MainActivity    onAttachedToWindow
+13:57:41.219     MainActivity    FragmentPagerAdapter.getItem: 1
+13:57:41.220     SearchView      <init>()
+13:57:41.220     MainActivity    FragmentPagerAdapter.getItem: 0
+13:57:41.220     CypherView      <init>()
+13:57:41.220     SearchView      onAttach
+13:57:41.220     SearchView      onCreate
+13:57:41.226     SearchView      onViewCreated
+13:57:41.227     SearchView      onActivityCreated
+13:57:41.227     SearchView      onViewStateRestored
+13:57:41.227     SearchView      onStart
+13:57:41.227     SearchView      onResume
+13:57:41.227     CypherView      onAttach
+13:57:41.228     CypherView      onCreate
+13:57:41.308     CypherView      onViewCreated
+13:57:41.308     CypherView      onActivityCreated
+13:57:41.308     CypherView      onViewStateRestored
+13:57:41.308     CypherView      onStart
+13:57:41.308     CypherView      onResume
+13:57:41.339     MainActivity    onWindowFocusChanged: true
+
+orientation change destroy
+
+13:58:47.646     SearchView      onSaveInstanceState
+13:58:47.647     CypherView      onSaveInstanceState
+13:58:47.650     MainActivity    onSaveInstanceState
+13:58:47.650     SearchView      onPause
+13:58:47.650     CypherView      onPause
+13:58:47.650     MainActivity    onPause
+13:58:47.660     SearchView      onStop
+13:58:47.661     CypherView      onStop
+13:58:47.661     MainActivity    onStop
+13:58:47.662     SearchView      onDestroyView
+13:58:47.663     SearchView      onDestroy
+13:58:47.663     SearchView      onDetach
+13:58:47.664     CypherView      onDestroyView
+13:58:47.676     CypherView      onDestroy
+13:58:47.676     CypherView      onDetach
+13:58:47.676     MainActivity    onDestroy
+13:58:47.678     MainActivity    onDetachedFromWindow
+
+orientation change restore
+
+13:58:47.723     MainActivity    <init>()
+13:58:47.723     SearchView      <init>()
+13:58:47.724     CypherView      <init>()
+13:58:47.724     SearchView      onAttach
+13:58:47.724     SearchView      onCreate
+13:58:47.724     CypherView      onAttach
+13:58:47.724     CypherView      onCreate
+13:58:47.724     MainActivity    onCreate
+13:58:48.945     MainActivity    onTabSelected: 0
+13:58:48.952     SearchView      onViewCreated
+13:58:48.952     SearchView      onActivityCreated
+13:58:48.952     SearchView      onViewStateRestored
+13:58:48.978     CypherView      onViewCreated
+13:58:48.978     CypherView      onActivityCreated
+13:58:48.982     CypherView      onViewStateRestored
+13:58:48.982     SearchView      onStart
+13:58:48.982     CypherView      onStart
+13:58:48.982     MainActivity    onStart
+13:58:48.983     MainActivity    onPageSelected: 1
+13:58:48.983     MainActivity    onTabSelected: 1
+13:58:48.985     MainActivity    onRestoreInstanceState
+13:58:48.986     MainActivity    onPostCreate
+13:58:48.986     MainActivity    onResume
+13:58:48.986     SearchView      onResume
+13:58:48.986     CypherView      onResume
+13:58:48.986     MainActivity    onPostResume
+13:58:48.991     MainActivity    onAttachedToWindow
+13:58:49.151     MainActivity    onWindowFocusChanged: true

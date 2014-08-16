@@ -27,13 +27,13 @@ trait ActivityLifecycleLogging extends Activity {
 
   override def onCreateView(name: String, context: Context, attrs: AttributeSet): View = {
     val view = super.onCreateView(name, context, attrs)
-    debug("onCreateView: " + name)
+//    debug("onCreateView: " + name)
     view
   }
 
   override def onCreateView(parent: View, name: String, context: Context, attrs: AttributeSet): View = {
     val view = super.onCreateView(parent, name, context, attrs)
-    debug("onCreateViewWithParent: " + name)
+//    debug("onCreateViewWithParent: " + name)
     view
   }
 

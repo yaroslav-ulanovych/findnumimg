@@ -1,5 +1,7 @@
 package com.chyvonalu.findnumimg.androidapp
 
+import java.io.InputStream
+
 import android.content.Context
 import android.graphics.Paint
 import android.graphics.Typeface
@@ -27,6 +29,8 @@ class SearchView extends MyFragment {
   val TAG = "SearchView"
   debug("<init>()")
 
+  private var dictionary: Dictionary = _
+
   override def onCreateView(inflater: LayoutInflater, container: ViewGroup, savedInstanceState: Bundle): View = {
     val view: View = inflater.inflate(R.layout.search_view, container, false)
     searchResultsView = view.findViewById(R.id.search_results_view).asInstanceOf[LinearLayout]
@@ -50,11 +54,17 @@ class SearchView extends MyFragment {
     return view
   }
 
+
+  override def onResume() {
+    super.onResume()
+    val stream = getResources.openRawResource(R.raw.dict)
+    dictionary = Dictionary.load(Utils.inputStreamToLowerCaseStrings(stream))
+  }
+
   def search {
     searchResultsView.removeAllViews
-    val cypher: Cypher = getMainActivity.cypher
-    val dictionary: Dictionary = getMainActivity.dictionary
-    val rangesOpt: Option[List[NumRange]] = RangeParser.parse(rangeInput.getText.toString)
+    val cypher = getMainActivity.cypherView.getCypher
+    val rangesOpt = RangeParser.parse(rangeInput.getText.toString)
     if (rangesOpt.isDefined) {
       val rangeList: List[NumRange] = rangesOpt.get
       val rangeIterator: Iterator[NumRange] = rangeList.iterator
