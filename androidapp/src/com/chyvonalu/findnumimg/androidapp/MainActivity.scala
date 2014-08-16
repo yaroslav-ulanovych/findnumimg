@@ -20,7 +20,10 @@ import java.io.InputStream
 
 import com.chyvonalu.findnumimg.core.{Utils, Dictionary, Cypher}
 
-class MainActivity extends FragmentActivity with ActionBar.TabListener {
+class MainActivity extends FragmentActivity with ActionBar.TabListener with HasLogger with ActivityLifecycleLogging {
+  val TAG = "MainActivity"
+  debug("<init>()")
+
   def loadSettings {
     val settings: SharedPreferences = getSharedPreferences("settings", Context.MODE_PRIVATE)
     cypher = Cypher.buildFromStrings(Tuple10.apply(settings.getString("cypher0", "н"), settings.getString("cypher1", "м"), settings.getString("cypher2", "б"), settings.getString("cypher3", "т"), settings.getString("cypher4", "ч к"), settings.getString("cypher5", "п"), settings.getString("cypher6", "ш г х"), settings.getString("cypher7", "с"), settings.getString("cypher8", "в"), settings.getString("cypher9", "д")))
@@ -40,7 +43,7 @@ class MainActivity extends FragmentActivity with ActionBar.TabListener {
     return super.onCreateView(name, context, attrs)
   }
 
-  protected override def onCreate(savedInstanceState: Bundle) {
+  override def onCreate(savedInstanceState: Bundle) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_main_activity)
     loadSettings
@@ -51,7 +54,7 @@ class MainActivity extends FragmentActivity with ActionBar.TabListener {
     viewPager.setAdapter(sectionsPagerAdapter)
     viewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener {
       override def onPageSelected(position: Int) {
-        Log.d("PageChangeListener", s"position: $position")
+        debug(s"onPageSelected: $position")
         actionBar.setSelectedNavigationItem(position)
         prevPosition = position
       }
@@ -65,7 +68,7 @@ class MainActivity extends FragmentActivity with ActionBar.TabListener {
     }
   }
 
-  protected override def onResume {
+  override def onResume {
     super.onResume
     viewPager.setCurrentItem(1)
   }
@@ -84,7 +87,7 @@ class MainActivity extends FragmentActivity with ActionBar.TabListener {
   }
 
   def onTabSelected(tab: ActionBar.Tab, fragmentTransaction: FragmentTransaction) {
-    Log.d("TabListener", s"tab: ${tab.getPosition}")
+    debug(s"onTabSelected: ${tab.getPosition}")
     viewPager.setCurrentItem(tab.getPosition)
   }
 
@@ -101,7 +104,7 @@ class MainActivity extends FragmentActivity with ActionBar.TabListener {
 
   class SectionsPagerAdapter(fm: FragmentManager) extends FragmentPagerAdapter(fm) {
     def getItem(position: Int): Fragment = {
-      Log.d("FragmentPagerAdapter", s"getItem: $position")
+      debug(s"FragmentPagerAdapter.getItem: $position")
       position match {
         case 0 => new CypherView
         case 1 => new SearchView

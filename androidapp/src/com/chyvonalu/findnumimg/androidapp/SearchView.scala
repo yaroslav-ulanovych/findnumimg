@@ -25,6 +25,7 @@ import scala.collection.immutable.List
 
 class SearchView extends MyFragment {
   val TAG = "SearchView"
+  debug("<init>()")
 
   override def onCreateView(inflater: LayoutInflater, container: ViewGroup, savedInstanceState: Bundle): View = {
     val view: View = inflater.inflate(R.layout.search_view, container, false)
@@ -47,11 +48,6 @@ class SearchView extends MyFragment {
       }
     })
     return view
-  }
-
-  override def onResume {
-    super.onResume
-    Log.d(TAG, "onEnter")
   }
 
   def search {

@@ -1,7 +1,6 @@
 package com.chyvonalu.findnumimg.androidapp
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +9,7 @@ import com.chyvonalu.findnumimg.core.Cypher
 
 class CypherView() extends MyFragment() {
   val TAG = "CypherView"
+  debug("<init>()")
 
   def getInputs: Array[EditText] = {
     val view: View = getView
@@ -18,11 +18,6 @@ class CypherView() extends MyFragment() {
 
   override def onCreateView(inflater: LayoutInflater, container: ViewGroup, savedInstanceState: Bundle): View = {
     return inflater.inflate(R.layout.cypher_view, container, false)
-  }
-
-  override def onResume {
-    super.onResume
-    Log.d(TAG, "onEnter")
   }
 
   def updateView {
