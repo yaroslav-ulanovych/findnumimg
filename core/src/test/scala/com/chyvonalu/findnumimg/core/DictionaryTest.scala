@@ -1,8 +1,6 @@
 package com.chyvonalu.findnumimg.core
 
-import org.scalatest.{Matchers, FunSuite}
-
-class DictionaryTest extends FunSuite with Matchers {
+class DictionaryTest extends FunSuite {
   test{"load"} {
     val dict = Dictionary.load(List("авокадо", "коса", "киса"))
 

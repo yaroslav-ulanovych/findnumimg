@@ -59,19 +59,14 @@ class SearchView extends MyFragment {
 
   override def onResume() {
     super.onResume()
-    def measure[T](f: => T): (T, Long) = {
-      val before = System.currentTimeMillis
-      val z = f
-      val after = System.currentTimeMillis
-      (z, after - before)
-    }
+
     val stream = getResources.openRawResource(R.raw.dict)
 
-    val (strings, time1) = measure {
+    val (strings, time1) = Utils.measure {
       Utils.inputStreamToLowerCaseStrings(stream)
     }
 
-    val (_, time2) = measure {
+    val (_, time2) = Utils.measure {
       dictionary = Dictionary.load(strings)
     }
 

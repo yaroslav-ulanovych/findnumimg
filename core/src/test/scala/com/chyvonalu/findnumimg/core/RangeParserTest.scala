@@ -1,8 +1,6 @@
 package com.chyvonalu.findnumimg.core
 
-import org.scalatest.{Matchers, FunSuite}
-
-class RangeParserTest extends FunSuite with Matchers {
+class RangeParserTest extends FunSuite {
   test("parse") {
     RangeParser.parse("  1  ") shouldBe Some(List(NumRange(1, 1, 1)))
     RangeParser.parse("  001  ") shouldBe Some(List(NumRange(1, 1, 3)))

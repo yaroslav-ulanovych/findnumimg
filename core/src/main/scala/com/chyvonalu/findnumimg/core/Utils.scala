@@ -29,6 +29,13 @@ object Utils {
     result.toString
   }
 
+  def measure[T](f: => T): (T, Long) = {
+    val before = System.currentTimeMillis
+    val z = f
+    val after = System.currentTimeMillis
+    (z, after - before)
+  }
+
   def find(digits: Digits, dictionary: Dictionary, cypher: Cypher): Seq[String] = {
     val keys = cypher.encode(digits)
     keys.map(key => (key, dictionary.get(key))).map({
