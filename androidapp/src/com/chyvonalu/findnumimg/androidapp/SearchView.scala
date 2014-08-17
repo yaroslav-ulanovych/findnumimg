@@ -55,10 +55,27 @@ class SearchView extends MyFragment {
     return view
   }
 
+
+
   override def onResume() {
     super.onResume()
+    def measure[T](f: => T): (T, Long) = {
+      val before = System.currentTimeMillis
+      val z = f
+      val after = System.currentTimeMillis
+      (z, after - before)
+    }
     val stream = getResources.openRawResource(R.raw.dict)
-    dictionary = Dictionary.load(Utils.inputStreamToLowerCaseStrings(stream))
+
+    val (strings, time1) = measure {
+      Utils.inputStreamToLowerCaseStrings(stream)
+    }
+
+    val (_, time2) = measure {
+      dictionary = Dictionary.load(strings)
+    }
+
+    debug(s"loaded dict, inputStreamToLowerCaseStrings:  ${time1}ms, load: ${time2}ms")
   }
 
   def search {
@@ -77,7 +94,7 @@ class SearchView extends MyFragment {
             val before = System.currentTimeMillis
             val list = Utils.find(digits, dictionary, cypher)
             val after = System.currentTimeMillis
-            Log.d("search", s"${after - before}ms")
+            debug(s"search in ${after - before}ms")
             list foreach { s =>
               val textView = inflater.inflate(R.layout.search_results_item, null).asInstanceOf[TextView]
               textView.setText(s)
