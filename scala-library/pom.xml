@@ -1,0 +1,119 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.mahpella.findnumimg</groupId>
+		<artifactId>parent</artifactId>
+		<version>1.0-SNAPSHOT</version>
+	</parent>
+	<artifactId>scala-library</artifactId>
+	<packaging>jar</packaging>
+	<version>1.0-SNAPSHOT</version>
+	<name>Find Number Image Scala Library</name>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<version>2.8</version>
+				<executions>
+					<execution>
+						<id>copy apk</id>
+						<phase>generate-sources</phase>
+						<goals><goal>copy</goal></goals>
+						<configuration>
+							<artifactItems>
+								<artifactItem>
+									<groupId>com.mahpella.findnumimg</groupId>
+									<artifactId>androidapp</artifactId>
+									<version>${version}</version>
+									<type>apk</type>
+									<overWrite>true</overWrite>
+									<outputDirectory>${project.build.directory}</outputDirectory>
+									<destFileName>androidapp.apk</destFileName>
+								</artifactItem>
+							</artifactItems>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<version>1.7</version>
+				<executions>
+					<execution>
+						<id>unzip apk</id>
+						<phase>generate-sources</phase>
+						<goals><goal>run</goal></goals>
+						<configuration>
+							<tasks>
+								<unzip src="${project.build.directory}/androidapp.apk" dest="${project.build.directory}/apk" />
+							</tasks>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<version>1.3.2</version>
+				<executions>
+					<execution>
+						<id>dex2jar</id>
+						<phase>generate-sources</phase>
+						<goals><goal>exec</goal></goals>
+						<configuration>
+							<executable>d2j-dex2jar.sh</executable>
+							<arguments>
+								<argument>${project.build.directory}/apk/classes.dex</argument>
+								<argument>-o</argument>
+								<argument>${project.build.directory}/classes.jar</argument>
+							</arguments>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<version>1.7</version>
+				<executions>
+					<execution>
+						<id>unzip classes.jar</id>
+						<phase>process-sources</phase>
+						<goals><goal>run</goal></goals>
+						<configuration>
+							<tasks>
+								<unzip src="${project.build.directory}/classes.jar" dest="${project.build.outputDirectory}"/>
+							</tasks>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<version>1.3.2</version>
+				<executions>
+					<execution>
+						<id>remove not scala-library classes</id>
+						<phase>process-sources</phase>
+						<goals><goal>exec</goal></goals>
+						<configuration>
+							<executable>rm</executable>
+							<arguments>
+								<argument>-rf</argument>
+								<argument>${project.build.outputDirectory}/com</argument>
+								<argument>${project.build.outputDirectory}/android</argument>
+							</arguments>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+		</plugins>
+	</build>
+
+</project>

@@ -12,7 +12,22 @@
 	<name>Find Number Image Core Library</name>
 
 	<dependencies>
-		<dependency><groupId>org.scala-lang.modules</groupId><artifactId>scala-parser-combinators_${scalaVersion}</artifactId><version>1.0.2</version></dependency>
+		<dependency>
+			<groupId>org.scala-lang</groupId>
+			<artifactId>scala-library</artifactId>
+			<version>${scalaVersionFull}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.scala-lang.modules</groupId>
+			<artifactId>scala-parser-combinators_${scalaVersion}</artifactId>
+			<version>1.0.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.scalatest</groupId>
+			<artifactId>scalatest_${scalaVersion}</artifactId>
+			<version>2.2.1</version>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 
 	<build>

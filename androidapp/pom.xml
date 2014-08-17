@@ -12,12 +12,38 @@
 	<name>Find Number Image Android Application</name>
 
 	<dependencies>
+
 		<dependency><groupId>com.google.android</groupId><artifactId>android</artifactId><version>4.1.1.4</version><scope>provided</scope></dependency>
 		<dependency><groupId>com.google.android</groupId><artifactId>android-test</artifactId><version>4.1.1.4</version><scope>provided</scope></dependency>
 		<dependency><groupId>android.support</groupId><artifactId>compatibility-v4</artifactId><version>20.0.0</version></dependency>
 
-
-		<dependency><groupId>com.mahpella.findnumimg</groupId><artifactId>core</artifactId><version>1.0-SNAPSHOT</version></dependency>
+		<dependency>
+			<groupId>org.scala-lang</groupId>
+			<artifactId>scala-library</artifactId>
+			<version>${scalaVersionFull}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.mahpella.findnumimg</groupId>
+			<artifactId>scala-library</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.mahpella.findnumimg</groupId>
+			<artifactId>core</artifactId>
+			<version>1.0-SNAPSHOT</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.scala-lang</groupId>
+					<artifactId>scala-library</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.scala-lang.modules</groupId>
+					<artifactId>scala-parser-combinators_${scalaVersion}</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<!-- <dependency><groupId>org.scala-lang</groupId><artifactId>scala-library</artifactId><version>${scalaVersionFull}</version><scope>test</scope></dependency> -->
 	</dependencies>
 
 	<build>
@@ -25,7 +51,7 @@
 
 		<plugins>
 			<plugin><groupId>net.alchim31.maven</groupId><artifactId>scala-maven-plugin</artifactId></plugin>
-			<plugin><groupId>org.scalatest</groupId><artifactId>scalatest-maven-plugin</artifactId></plugin>
+			<!-- <plugin><groupId>org.scalatest</groupId><artifactId>scalatest-maven-plugin</artifactId></plugin> -->
 
 			<plugin>
 				<groupId>com.jayway.maven.plugins.android.generation2</groupId>
@@ -40,7 +66,7 @@
 					</emulator>
 					<undeployBeforeDeploy>true</undeployBeforeDeploy>
 					<proguard>
-						<skip>false</skip>
+						<skip>true</skip>
 					</proguard>
 				</configuration>
 				<extensions>true</extensions>
