@@ -11,11 +11,13 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<scalaVersion>2.11</scalaVersion>
 		<scalaVersionFull>${scalaVersion}.2</scalaVersionFull>
+		<scalaParserCombinatorsVersion>1.0.2</scalaParserCombinatorsVersion>
 	</properties>
 
 	<modules>
 		<module>scala-library</module>
 		<module>core</module>
+		<module>androidapp-deps</module>
 		<module>androidapp</module>
 	</modules>
 

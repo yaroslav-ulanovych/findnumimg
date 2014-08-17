@@ -20,7 +20,7 @@
 		<dependency>
 			<groupId>org.scala-lang.modules</groupId>
 			<artifactId>scala-parser-combinators_${scalaVersion}</artifactId>
-			<version>1.0.2</version>
+			<version>${scalaParserCombinatorsVersion}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.scalatest</groupId>

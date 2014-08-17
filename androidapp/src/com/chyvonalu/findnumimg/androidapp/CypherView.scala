@@ -7,7 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
-import com.chyvonalu.findnumimg.core.Cypher
+import com.chyvonalu.findnumimg.core.{Digit, RussianConsonants, Cypher}
 
 class CypherView() extends MyFragment() {
   val TAG = "CypherView"
@@ -52,10 +52,13 @@ class CypherView() extends MyFragment() {
       get("cypher7", "с"),
       get("cypher8", "в"),
       get("cypher9", "д")
-    ))
+    ), RussianConsonants)
 
     inputs.zipWithIndex.foreach({
-      case (input, i) => input.setText(cypher.get(i).mkString(" "))
+      case (input, i) => {
+        val text = cypher.get(Digit.fromInt(i)).map(_.letter.value).mkString(" ")
+        input.setText(text)
+      }
     })
   }
 
@@ -75,7 +78,7 @@ class CypherView() extends MyFragment() {
 
   def getCypher: Cypher = {
     val xs = inputs.map(_.getText.toString)
-    Cypher.buildFromStrings(xs)
+    Cypher.buildFromStrings(xs, RussianConsonants)
   }
 }
 

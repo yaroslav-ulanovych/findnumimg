@@ -7,14 +7,14 @@ import scala.collection.mutable.{ListBuffer, ArrayBuffer}
 import scala.io.Source
 
 trait Dictionary {
-  def get(s: String): List[String]
+  def get(s: Seq[Consonant]): Seq[String]
 }
 
 object Dictionary {
   def load(xs: Traversable[String]): Dictionary = {
     val map = mutable.HashMap[String, ArrayBuffer[String]]()
     xs foreach {x =>
-      val key = Utils.toConsonants(x)
+      val key = RussianConsonants.filter(x).map(_.letter.value).mkString
       val xs = map.get(key) match {
         case Some(xs) => xs
         case None => {
@@ -26,7 +26,10 @@ object Dictionary {
       xs += x
     }
     new Dictionary{
-      override def get(s: String): List[String] = map.get(s).map(_.toList).getOrElse(List())
+      override def get(s: Seq[Consonant]): Seq[String] = {
+        val key = s.map(_.letter.value).mkString
+        map.get(key).map(_.toList).getOrElse(List())
+      }
     }
   }
 }

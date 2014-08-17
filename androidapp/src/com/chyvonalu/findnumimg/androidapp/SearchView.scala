@@ -70,13 +70,12 @@ class SearchView extends MyFragment {
     RangeParser.parse(rangeInput.getText.toString) match {
       case Some(ranges) => {
         ranges.map(_.normalize) foreach { range =>
-          val width = range.width
-          for(i <- range.from to range.to) {
+          range foreach { digits =>
             val textView = inflater.inflate(R.layout.search_results_header, null).asInstanceOf[TextView]
-            textView.setText(String.format("%0" + width + "d", new Integer(i)))
+            textView.setText(digits.toString)
             searchResultsView.addView(textView)
             val before = System.currentTimeMillis
-            val list = Utils.find(i, width, dictionary, cypher)
+            val list = Utils.find(digits, dictionary, cypher)
             val after = System.currentTimeMillis
             Log.d("search", s"${after - before}ms")
             list foreach { s =>

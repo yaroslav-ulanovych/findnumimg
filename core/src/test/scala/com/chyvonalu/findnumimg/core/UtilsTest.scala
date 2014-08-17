@@ -1,19 +1,6 @@
 package com.chyvonalu.findnumimg.core
 
-import org.scalatest.{Matchers, FunSuite}
-
-class UtilsTest extends FunSuite with Matchers {
-  test("toDigits") {
-    Utils.toDigits(123) shouldBe List(1, 2, 3)
-    Utils.toDigits(1) shouldBe List(1)
-  }
-
-  test("pad") {
-    Utils.pad(List(1), 3) shouldBe List(0, 0, 1)
-    Utils.pad(List(1), 2) shouldBe List(0, 1)
-    Utils.pad(List(1), 1) shouldBe List(1)
-  }
-
+class UtilsTest extends FunSuite {
   test("product") {
     Utils.product(List(List(1, 2))) shouldBe List(List(1), List(2))
 
@@ -29,10 +16,5 @@ class UtilsTest extends FunSuite with Matchers {
   test("highlight") {
     Utils.highlight("deepbluesky", List("d", "b", "s")) shouldBe "DeepBlueSky"
     Utils.highlight("blabla", List("bl", "bl")) shouldBe "BLaBLa"
-  }
-
-  test("toConsonants") {
-    Utils.toConsonants("авокадо") shouldBe "вкд"
-    Utils.toConsonants("ааоуэыи") shouldBe ""
   }
 }
