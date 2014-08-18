@@ -11,6 +11,19 @@
 	<version>1.0-SNAPSHOT</version>
 	<name>Find Number Image Scala Library</name>
 
+	<profiles>
+		<profile>
+			<id>Windows</id>
+			<activation><os><family>Windows</family></os></activation>
+			<properties><dex2jarExecutable>d2j-dex2jar.bat</dex2jarExecutable></properties>
+		</profile>
+		<profile>
+			<id>Linux</id>
+			<activation><os><family>Linux</family></os></activation>
+			<properties><dex2jarExecutable>d2j-dex2jar.sh</dex2jarExecutable></properties>
+		</profile>
+	</profiles>
+
 	<build>
 		<plugins>
 			<plugin>
@@ -66,7 +79,7 @@
 						<phase>generate-sources</phase>
 						<goals><goal>exec</goal></goals>
 						<configuration>
-							<executable>d2j-dex2jar.sh</executable>
+							<executable>${dex2jarExecutable}</executable>
 							<arguments>
 								<argument>${project.build.directory}/apk/classes.dex</argument>
 								<argument>-o</argument>
