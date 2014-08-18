@@ -10,12 +10,12 @@ class VarTest extends FunSuite {
     Character.isLowerCase('Q') shouldBe false
   }
 
-  test("dict load time") {
-    val file = new File("./androidapp/res/raw/dict")
-    val (_, time) = Utils.measure {
-      val strings = Utils.inputStreamToLowerCaseStrings(new FileInputStream(file))
-      Dictionary.load(strings)
-    }
+//  test("dict load time") {
+//    val file = new File("./androidapp/res/raw/dict")
+//    val (_, time) = Utils.measure {
+//      val strings = Utils.inputStreamToLowerCaseStrings(new FileInputStream(file))
+//      Dictionary.load(strings)
+//    }
 //    println(s"time: $time")
-  }
+//  }
 }
