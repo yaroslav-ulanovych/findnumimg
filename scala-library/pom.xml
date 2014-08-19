@@ -28,6 +28,7 @@
 									<groupId>com.mahpella.findnumimg</groupId>
 									<artifactId>androidapp</artifactId>
 									<version>${version}</version>
+									<classifier>proguard</classifier>
 									<type>apk</type>
 									<overWrite>true</overWrite>
 									<outputDirectory>${project.build.directory}</outputDirectory>

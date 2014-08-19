@@ -45,6 +45,7 @@
 						<artifactId>android-maven-plugin</artifactId>
 						<configuration>
 							<proguard><skip>false</skip></proguard>
+							<classifier>proguard</classifier>
 						</configuration>
 					</plugin>
 				</plugins>
