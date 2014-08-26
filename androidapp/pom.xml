@@ -12,16 +12,45 @@
 	<name>Find Number Image Android Application</name>
 
 	<dependencies>
-		<dependency><artifactId>android</artifactId><groupId>com.google.android</groupId><version>4.1.1.4</version><scope>provided</scope></dependency>
-		<dependency><artifactId>android-test</artifactId><groupId>com.google.android</groupId><version>4.1.1.4</version><scope>provided</scope></dependency>
-		<dependency><artifactId>compatibility-v4</artifactId><groupId>android.support</groupId><version>20.0.0</version></dependency>
+		<dependency>
+			<groupId>com.google.android</groupId>
+			<artifactId>android</artifactId>
+			<version>4.1.1.4</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.google.android</groupId>
+			<artifactId>android-test</artifactId>
+			<version>4.1.1.4</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>android.support</groupId>
+			<artifactId>compatibility-v4</artifactId>
+			<version>20.0.0</version>
+		</dependency>
 
-		<dependency><artifactId>scala-library</artifactId><groupId>org.scala-lang</groupId><version>${scalaVersionFull}</version><scope>provided</scope></dependency>
+		<dependency>
+			<groupId>org.scala-lang</groupId>
+			<artifactId>scala-library</artifactId>
+			<version>${scalaVersionFull}</version>
+			<scope>provided</scope>
+		</dependency>
 
-		<dependency><artifactId>androidapp-deps</artifactId><groupId>com.mahpella.findnumimg</groupId><version>1.0-SNAPSHOT</version><type>pom</type>
+		<dependency>
+			<groupId>com.mahpella.findnumimg</groupId>
+			<artifactId>androidapp-deps</artifactId>
+			<version>1.0-SNAPSHOT</version>
+			<type>pom</type>
 			<exclusions>
-				<exclusion><artifactId>scala-library</artifactId><groupId>org.scala-lang</groupId></exclusion>
-				<exclusion><artifactId>scala-parser-combinators_${scalaVersion}</artifactId><groupId>org.scala-lang.modules</groupId></exclusion>
+				<exclusion>
+					<groupId>org.scala-lang</groupId>
+					<artifactId>scala-library</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.scala-lang.modules</groupId>
+					<artifactId>scala-parser-combinators_${scalaVersion}</artifactId>
+				</exclusion>
 			</exclusions>
 		</dependency>
 	</dependencies>
@@ -30,10 +59,21 @@
 		<profile>
 			<id>proguard</id>
 			<dependencies>
-						<dependency><artifactId>scala-library</artifactId><groupId>org.scala-lang</groupId><version>${scalaVersionFull}</version></dependency>
-				<dependency><artifactId>androidapp-deps</artifactId><groupId>com.mahpella.findnumimg</groupId><version>1.0-SNAPSHOT</version><type>pom</type>
+				<dependency>
+					<groupId>org.scala-lang</groupId>
+					<artifactId>scala-library</artifactId>
+					<version>${scalaVersionFull}</version>
+				</dependency>
+				<dependency>
+					<groupId>com.mahpella.findnumimg</groupId>
+					<artifactId>androidapp-deps</artifactId>
+					<version>1.0-SNAPSHOT</version>
+					<type>pom</type>
 					<exclusions>
-						<exclusion><artifactId>scala-library</artifactId><groupId>com.mahpella.findnumimg</groupId></exclusion>
+						<exclusion>
+							<groupId>com.mahpella.findnumimg</groupId>
+							<artifactId>scala-library</artifactId>
+						</exclusion>
 					</exclusions>
 				</dependency>
 			</dependencies>
